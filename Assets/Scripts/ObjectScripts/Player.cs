@@ -5,6 +5,10 @@ public class Player : MonoBehaviour
 {
     [SerializeField] float speed = 1.0f;
     [SerializeField] GameObject missilePrefab;
+    [SerializeField] float boundaryX = 8.0f;
+    [SerializeField] float boundaryY = 4.75f;
+    [SerializeField] Transform firePoint;
+    public int points;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,9 +25,16 @@ public class Player : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(horizontalInput * Vector2.right * Time.deltaTime * speed);
 
-        if(Input.GetButtonDown("Jump"))
+        Vector2 clampedPosition = transform.position;
+        clampedPosition.x = Mathf.Clamp(clampedPosition.x, -boundaryX, boundaryX);
+        transform.position = clampedPosition;
+
+        clampedPosition.y = Mathf.Clamp(clampedPosition.y, -boundaryY, boundaryY);
+        transform.position = clampedPosition;
+
+        if (Input.GetButtonDown("Jump"))
         {
-            Instantiate(missilePrefab, transform.position, Quaternion.identity);
+            Instantiate(missilePrefab, transform.position , Quaternion.identity);
         }
     }
 
