@@ -10,15 +10,28 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     [SerializeField] TMP_Text TopLeftText;
     [SerializeField] TMP_Text TopRightText;
-    public int score;
-    public int lives;
-    public int points;
+    [SerializeField] TMP_Text MiddleBanner;
+    [SerializeField] int playerScore;
+    [SerializeField] int lives;
+    [SerializeField] int playerLives;
+    [SerializeField] int smallPoints = 10;
+    [SerializeField] int bigPoints = 20;
     [SerializeField] bool isGameOver = false;
     [SerializeField] Button restartButton;
 
     public GameObject gameOverUI;
 
-
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -36,14 +49,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+        UpdateScore();
+        
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             // finish making the game over menu
             //
-            // gameOverMenu.SetActive(!gameOverMenu.activeInHierarchy);
+            
         }
-        TopLeftText.text = "Score: " + score;
-        TopRightText.text = lives + " Lives";
+
     }
 
     public void ResetGame()
@@ -53,9 +67,9 @@ public class GameManager : MonoBehaviour
 
     public void GameSetup()
     {
-        score = 0;
+        playerScore = 0;
         lives = 3;
-        TopLeftText.text = "Score: " + score;
+        TopLeftText.text = "Score: " + playerScore;
         TopRightText.text = lives + " Lives";
 
     }
@@ -63,17 +77,26 @@ public class GameManager : MonoBehaviour
     public void AddScoreSmall(int smallPoints) 
     {
 
-        score += smallPoints; 
+        playerScore += smallPoints;
+        return;
     }
 
     public void AddScoreBig(int bigPoints)
     {
-        score += bigPoints;
+        playerScore += bigPoints;
+        return;
     }
 
-    public void AddLives()
+    public void AddLives(int playerLives)
     {
-        lives++;
+        lives += playerLives;
+        return;
+    }
+
+    public void ReduceLives(int playerLives)
+    {
+        lives -= playerLives;
+        return;
     }
 
     public void GameOver()
@@ -81,8 +104,15 @@ public class GameManager : MonoBehaviour
         if (!isGameOver)
         {
             isGameOver = true;
+            MiddleBanner.text = "Game Over";
             gameOverUI.SetActive(true);
         }
+    }
+
+    public void UpdateScore()
+    {
+        TopLeftText.text = "Score: " + playerScore;
+        TopRightText.text = lives + " Lives";
     }
 
 

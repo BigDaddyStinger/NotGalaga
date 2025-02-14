@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices.WindowsRuntime;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -25,6 +26,7 @@ public class Enemy : MonoBehaviour
 
             Destroy(gameObject);
 
+
         }
     }
 
@@ -32,6 +34,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.GetComponent<Missile>() != null)
         {
+            
             GameManager.Instance.AddScoreBig(20);
             Debug.Log("Enemy hit by " + collision.gameObject.name);
             

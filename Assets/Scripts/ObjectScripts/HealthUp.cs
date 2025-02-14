@@ -32,7 +32,7 @@ public class HealthUp : MonoBehaviour
     {
         if (collision.GetComponent<Missile>() != null)
         {
-            GameManager.Instance.AddLives();
+            GameManager.Instance.AddLives(1);
             Debug.Log("Enemy hit by " + collision.gameObject.name);
 
             Destroy(gameObject);
