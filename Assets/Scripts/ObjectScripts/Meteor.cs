@@ -11,18 +11,17 @@ public class Meteor : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
     {
-        verticalInput = Random.Range(1, 3);
+        meteorMovement();
     }
 
     // Update is called once per frame
     public void Update()
     {
 
-        transform.Translate(verticalInput * Vector2.down * Time.deltaTime * speed);
-
+        meteorMovement();
         if (transform.position.y <= bottomY)
         {
-
+            GameManager.Instance.ReduceLives(1);
             Destroy(gameObject);
 
         }
@@ -38,5 +37,21 @@ public class Meteor : MonoBehaviour
             Destroy(gameObject);
 
         }
+        if (collision.GetComponent<Player>() != null)
+        {
+            GameManager.Instance.ReduceLives(1);
+            Destroy(gameObject);
+        }
+    }
+
+    public void meteorMovement()
+    {
+        if (GameManager.Instance.isGameOver == false)
+        {
+            verticalInput = Random.Range(1, 3);
+            transform.Translate(verticalInput * Vector2.down * Time.deltaTime * speed);
+        }
+        else
+            verticalInput = 0;
     }
 }

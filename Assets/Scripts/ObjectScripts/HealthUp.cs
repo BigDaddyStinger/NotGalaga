@@ -11,14 +11,14 @@ public class HealthUp : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
     {
-        verticalInput = Random.Range(3, 8);
+        healthUpMovement();
     }
 
     // Update is called once per frame
     public void Update()
     {
-
-        transform.Translate(verticalInput * Vector2.down * Time.deltaTime * speed);
+        healthUpMovement();
+        
 
         if (transform.position.y <= bottomY)
         {
@@ -38,5 +38,21 @@ public class HealthUp : MonoBehaviour
             Destroy(gameObject);
 
         }
+        if (collision.GetComponent<Player>() != null)
+        {
+            GameManager.Instance.AddLives(1);
+            Destroy(gameObject);
+        }
+    }
+
+    public void healthUpMovement()
+    {
+        if (GameManager.Instance.isGameOver == false)
+        {
+            verticalInput = Random.Range(3, 8);
+            transform.Translate(verticalInput * Vector2.down * Time.deltaTime * speed);
+        }
+        else
+            verticalInput = 0;
     }
 }

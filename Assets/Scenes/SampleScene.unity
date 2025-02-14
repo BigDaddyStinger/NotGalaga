@@ -252,13 +252,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TopLeftText: {fileID: 1939946727}
-  TopRightText: {fileID: 0}
+  TopRightText: {fileID: 163836596}
   MiddleBanner: {fileID: 1671149652}
   playerScore: 0
   lives: 0
   playerLives: 0
-  smallPoints: 10
-  bigPoints: 20
   isGameOver: 0
   restartButton: {fileID: 608399325}
   gameOverUI: {fileID: 54210586}
@@ -1076,6 +1074,9 @@ MonoBehaviour:
   difficultySlider: 1
   timeBetweenSpawn: 5
   elapsedSinceLastSpawn: 2
+  difficultyTimer: 1
+  difficultyIncreaseClock: 1
+  speed: 1
 --- !u!1 &1061156821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,11 +1386,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a256e499ef820ee4f9b40f0ec517ecdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 8
   missilePrefab: {fileID: 1585056011069097010, guid: d7179691e6780c74895a23e50a152475, type: 3}
   boundaryX: 8
   boundaryY: 4.75
   firePoint: {fileID: 1625190374}
+  offset: {x: 0, y: 1, z: 0}
   points: 0
 --- !u!1 &1645462771
 GameObject:

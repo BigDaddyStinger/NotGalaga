@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] float boundaryX = 8.0f;
     [SerializeField] float boundaryY = 4.75f;
     [SerializeField] Transform firePoint;
+    [SerializeField] Vector3 offset;
     public int points;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -34,7 +35,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-            Instantiate(missilePrefab, transform.position , Quaternion.identity);
+            Instantiate(missilePrefab, transform.position + offset, Quaternion.identity);
         }
     }
 

@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 using System;
+using UnityEditor.Build;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,12 +12,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text TopLeftText;
     [SerializeField] TMP_Text TopRightText;
     [SerializeField] TMP_Text MiddleBanner;
-    [SerializeField] int playerScore;
-    [SerializeField] int lives;
-    [SerializeField] int playerLives;
-    [SerializeField] int smallPoints = 10;
-    [SerializeField] int bigPoints = 20;
-    [SerializeField] bool isGameOver = false;
+    [SerializeField] public int playerScore;
+    [SerializeField] public int lives;
+    [SerializeField] public int playerLives;
+    [SerializeField] public bool isGameOver = false;
     [SerializeField] Button restartButton;
 
     public GameObject gameOverUI;
@@ -37,13 +36,13 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
     {
-        
+
         GameSetup();
        if (restartButton != null)
        {
             restartButton.onClick.AddListener(ResetGame);
        }
-//        gameOverUI.SetActive(false);
+        gameOverUI.SetActive(false);
     }
 
     // Update is called once per frame
@@ -53,11 +52,12 @@ public class GameManager : MonoBehaviour
         
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            // finish making the game over menu
-            //
-            
+            GameOver();
         }
-
+        if(lives <= 0)
+        {
+            GameOver();
+        }
     }
 
     public void ResetGame()
@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
         lives = 3;
         TopLeftText.text = "Score: " + playerScore;
         TopRightText.text = lives + " Lives";
+        return;
 
     }
 
@@ -95,13 +96,16 @@ public class GameManager : MonoBehaviour
 
     public void ReduceLives(int playerLives)
     {
-        lives -= playerLives;
+            lives -= playerLives;
+        if (lives <= 0)
+            isGameOver = true;
+        else
         return;
     }
 
     public void GameOver()
     {
-        if (!isGameOver)
+        if (isGameOver)
         {
             isGameOver = true;
             MiddleBanner.text = "Game Over";

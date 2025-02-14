@@ -4,7 +4,7 @@ public class LifeSpawner : MonoBehaviour
 {
     [SerializeField] GameObject LifePrefab;
     [SerializeField] float difficultySlider = 1.0f;
-    [SerializeField] float timeBetweenSpawn = 1.0f;
+    [SerializeField] float timeBetweenSpawn = 40.0f;
     [SerializeField] float elapsedSinceLastSpawn = 0.0f;
 
 
@@ -17,7 +17,7 @@ public class LifeSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        elapsedSinceLastSpawn += Time.deltaTime * difficultySlider;
+        elapsedSinceLastSpawn += Time.deltaTime / difficultySlider;
 
         if (elapsedSinceLastSpawn > timeBetweenSpawn)
         {
