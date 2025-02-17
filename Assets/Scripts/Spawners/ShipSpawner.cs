@@ -46,9 +46,9 @@ public class ShipSpawner : MonoBehaviour
         difficultyTimer += Time.deltaTime * speed;
         //difficultyIncreaseClock = Time.deltaTime * speed;
 
-        if(difficultyTimer > difficultyIncreaseClock)
+        if(difficultyTimer > difficultyIncreaseClock && elapsedSinceLastSpawn > 0.3) 
         {
-            difficultySlider -= 0.05f;
+            difficultySlider -= 0.005f;
             difficultyTimer = 0.0f;
         }
     }

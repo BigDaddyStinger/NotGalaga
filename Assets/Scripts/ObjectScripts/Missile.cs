@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Missile : MonoBehaviour
 {
-    [SerializeField] float missileSpeed = 4.0f;
+    [SerializeField] float missileSpeed = 6.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

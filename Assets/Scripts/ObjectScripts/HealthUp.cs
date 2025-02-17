@@ -36,6 +36,7 @@ public class HealthUp : MonoBehaviour
             Debug.Log("Enemy hit by " + collision.gameObject.name);
 
             Destroy(gameObject);
+            Destroy(collision.gameObject);
 
         }
         if (collision.GetComponent<Player>() != null)

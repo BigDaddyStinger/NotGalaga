@@ -20,11 +20,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float verticalInput = Input.GetAxis("Vertical");
-        transform.Translate(verticalInput * Vector2.up * Time.deltaTime * speed);
+        if (GameManager.Instance.isGameOver == false)
+        {
+            float verticalInput = Input.GetAxis("Vertical");
+            transform.Translate(verticalInput * Vector2.up * Time.deltaTime * speed);
 
-        float horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(horizontalInput * Vector2.right * Time.deltaTime * speed);
+            float horizontalInput = Input.GetAxis("Horizontal");
+            transform.Translate(horizontalInput * Vector2.right * Time.deltaTime * speed);
+        }
+
 
         Vector2 clampedPosition = transform.position;
         clampedPosition.x = Mathf.Clamp(clampedPosition.x, -boundaryX, boundaryX);

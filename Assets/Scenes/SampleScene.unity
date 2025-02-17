@@ -1391,7 +1391,7 @@ MonoBehaviour:
   boundaryX: 8
   boundaryY: 4.75
   firePoint: {fileID: 1625190374}
-  offset: {x: 0, y: 1, z: 0}
+  offset: {x: 0, y: 0.65, z: 0}
   points: 0
 --- !u!1 &1645462771
 GameObject:
